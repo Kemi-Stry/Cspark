@@ -18,12 +18,20 @@ int main(int argc, char **argv) {
     return 0;
   }
 
+  if (argc < 6) {
+    std::println("invalid arguments");
+    return -1;
+  }
+
   std::string type = argv[2];
   std::string lang = argv[3];
   std::string std = argv[4];
   std::string path = argv[5];
 
-  if (type != "exe" && type != "lib" || lang != "c" && lang != "c++") {
+  bool valid_type = type == "exe" || type == "lib";
+  bool valid_lang = lang == "c" || lang == "c++";
+
+  if (!valid_type || !valid_lang) {
     std::println("invalid arguments");
     return -1;
   }
@@ -121,6 +129,7 @@ int main() {
     )";
   }
 
+  file.close();
   std::println("\nDone!");
   return 0;
 }
